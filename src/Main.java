@@ -11,29 +11,37 @@ public class Main {
         componentHarmfulMap.put("ぶどう果実",false);
         componentHarmfulMap.put("エストラジオール",true);
         Scanner sc = new Scanner(System.in);
-        String name = sc.next();
-        if(componentHarmfulMap.containsKey(name)){
-            hantei(name);
-        }
-        else{
-            String harmfulOrNot = sc.next();
-            if(harmfulOrNot.equals("有害")){
-                componentHarmfulMap.put(name,true);
-                hantei(name);
-            }
-            if(harmfulOrNot.equals("無害")){
-                componentHarmfulMap.put(name,false);
-                hantei(name);
-            }
+        int hanteikosu = sc.nextInt();
+        for(int i = 0;i<hanteikosu;i++){
+            String name = sc.next(); //物質名をうけとる
+            searchMaterial(name); //有害かどうか判定する
         }
     }
-    private static void hantei(String name){
-            Boolean isHarmful = componentHarmfulMap.get(name);
-            if(isHarmful) {
-                System.out.println("有害です");
+    private static void judge(String name){
+        Boolean isHarmful = componentHarmfulMap.get(name);
+        if(isHarmful) {
+            System.out.println("有害です");
+        }
+        else{
+            System.out.println("無害です");
+        }
+    }
+    private static void searchMaterial(String name){
+        Scanner sc = new Scanner(System.in);
+        if(componentHarmfulMap.containsKey(name)){
+            judge(name);
+        }
+        else {
+            String harmfulOrNot = sc.next();
+            if (harmfulOrNot.equals("有害")) {
+                componentHarmfulMap.put(name, true);
+                judge(name);
+            } else if (harmfulOrNot.equals("無害")) {
+                componentHarmfulMap.put(name, false);
+                judge(name);
+            } else {
+                System.out.println("もう一度入力してください");
             }
-            else{
-                System.out.println("無害です");
-            }
+        }
     }
 }
